@@ -1,5 +1,9 @@
 <template>
   <div>
+    <mu-appbar title="Euphoria">
+      <mu-icon-button icon="menu" slot="left"/>
+      <mu-icon-button icon="expand_more" slot="right"/>
+    </mu-appbar>
     <nuxt/>
   </div>
 </template>
