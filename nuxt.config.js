@@ -11,23 +11,22 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro' }
     ]
   },
   css: [
-    'normalize.css'
+    'normalize.css',
+    { src: '../assets/theme.less', lang: 'less' }
   ],
   loading: {
     color: '#3B8070'
   },
   build: {
     vendor: [
-      // 'axios',
       'es6-promise',
       'isomorphic-fetch',
-      'lodash',
-      'muse-ui'
+      'iview',
+      'lodash'
     ],
     // Run ESLINT on save
     extend (config, ctx) {
@@ -45,6 +44,6 @@ module.exports = {
     middleware: 'check-auth'
   },
   plugins: [
-    { src: '~/plugins/muse-ui.js' }
+    { src: '~/plugins/iview.js' }
   ]
 }

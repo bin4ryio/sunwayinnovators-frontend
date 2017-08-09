@@ -2,16 +2,16 @@
   <div>
     <form v-if="!user" @submit.prevent="login">
       <h3>Please login to see the secret content</h3>
-      <mu-text-field label="Email" labelFloat v-model="email" />
-      <mu-text-field label="Password" labelFloat type="password" v-model="password" />
-      <mu-raised-button label="Login" type="submit" primary />
+      <Input v-model="email" placeholder="Email" />
+      <Input v-model="password" placeholder="Password" type="password"  />
+      <Button @click="login">Login</Button>
       <p class="error" v-if="error">{{ error }}</p>
     </form>
     <div v-else>
       <h3>Hello {{ user }}!</h3>
       <pre>I am the secret content, I am shown only when the use is connected.</pre>
       <p><i>You can also refresh this page, you'll still be connected!</i></p>
-      <mu-raised-button label="Logout" type="submit" primary @click="logout"/>
+      <Button @click="logout">Logout</Button>
     </div>
     <p><nuxt-link to="/secret">Super secret page</nuxt-link></p>
   </div>
@@ -48,7 +48,4 @@ export default {
 </script>
 
 <style>
-.error {
-  color: red;
-}
 </style>

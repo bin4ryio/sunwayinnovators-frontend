@@ -1,14 +1,12 @@
-import { setToken } from '../utils/auth'
+import { getUserFromLocalStorage, setToken, unsetToken } from '~/utils/auth'
 import { apiURL, httpPost } from '../utils/http'
 
 export const state = () => ({
-  accessToken: null,
   authError: null,
   authUser: null
 })
 
 export const getters = {
-  accessToken: state => state.accessToken,
   authError: state => state.authError,
   authUser: state => state.authUser
 }
@@ -20,10 +18,10 @@ export const actions = {
       password
     })
     .then((res) => {
-      commit('SET_ACCESS_TOKEN', res.data.data.access_token)
-      commit('SET_AUTH_USER', res.data.data.email)
-      dispatch('clearAuthError')
       setToken(res.data.data.access_token)
+      const loggedUser = getUserFromLocalStorage()
+      commit('auth/SET_AUTH_USER', loggedUser, { root: true })
+      dispatch('clearAuthError')
     })
     .catch((error) => {
       error.response.json()
@@ -34,6 +32,7 @@ export const actions = {
   },
 
   logout ({ commit }) {
+    unsetToken()
     commit('CLEAR_AUTH_USER')
   },
 
