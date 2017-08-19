@@ -1,17 +1,18 @@
 <template>
   <div>
-    <Login/>
+    <SignIn/>
+    <SignUp/>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import Login from '~/components/Login.vue'
+import SignIn from '~/components/SignIn.vue'
+import SignUp from '~/components/SignUp.vue'
 
 export default {
   components: {
-    Logo,
-    Login
+    SignIn,
+    SignUp
   }
 }
 </script>

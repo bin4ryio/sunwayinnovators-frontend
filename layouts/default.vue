@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Navbar/>
+    <navbar/>
     <div class="layout-content">
       <nuxt/>
     </div>
@@ -29,10 +29,10 @@ export default {
 }
 
 .layout-content {
-  max-width: 960px;
+  max-width: 992px;
   min-height: 200px;
   margin: 15px auto;
-  padding: 30px;
+  padding: 30px 20px;
   overflow: hidden;
   background: #fff;
   border-radius: 0px;

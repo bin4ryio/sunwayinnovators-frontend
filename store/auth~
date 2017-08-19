@@ -1,5 +1,5 @@
-import { getUserFromLocalStorage, setToken, unsetToken } from '~/utils/auth'
-// import { apiURL, httpPost } from '../utils/http'
+// import { getUserFromLocalStorage, setToken, unsetToken } from '~/utils/auth'
+import { apiURL, httpPost } from '../utils/http'
 
 export const state = () => ({
   authError: null,
@@ -12,38 +12,53 @@ export const getters = {
 }
 
 export const actions = {
+
   async signIn ({ commit, dispatch }, { axios, email, password }) {
-    try {
-      const res = await axios.post('auth/sign_in', {
-        email: email,
-        password: password
-      })
-      console.log(res.headers)
-      setToken(res.headers['access-token'])
-      dispatch('clearAuthError')
-    } catch (error) {
-      console.log(error)
-      dispatch('setAuthError', error.response.data.errors)
-    }
+    const res = await axios.$post('/auth/sign_in', {
+      email: email,
+      password: password
+    })
+    console.log(res)
   },
 
+  // signIn ({ commit, dispatch }, { email, password }) {
+  //   return httpPost(`${apiURL}/auth/sign_in`, {
+  //     email,
+  //     password
+  //   })
+  //   .then((res) => {
   //     console.log(res)
   //     setToken(res.data.data.access_token)
   //     const loggedUser = getUserFromLocalStorage()
   //     commit('auth/SET_AUTH_USER', loggedUser, { root: true })
   //     dispatch('clearAuthError')
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //     error.response.json()
+  //     .then(errorJSON => {
+  //       dispatch('setAuthError', errorJSON.data)
+  //     })
+  //   })
+  // },
 
-  async signUp ({ commit, dispatch }, { axios, email, password, passwordConfirmation }) {
-    const res = await axios.$post('/auth', {
-      email: email,
-      password: password,
-      password_confirmation: passwordConfirmation
+  signUp ({ commit, dispatch }, { email, password, passwordConfirmation }) {
+    return httpPost(`${apiURL}/auth`, {
+      email,
+      password
     })
-    console.log(res)
-    dispatch('clearAuthError')
+    .then((res) => {
+      dispatch('clearAuthError')
+    })
+    .catch((error) => {
+      error.response.json()
+      .then(errorJSON => {
+        dispatch('setAuthError', errorJSON.data)
+      })
+    })
   },
 
-  async signOut ({ commit }) {
+  signOut ({ commit }) {
     // unsetToken()
     commit('CLEAR_AUTH_USER')
     // .then((res) => {
@@ -56,7 +71,7 @@ export const actions = {
     commit('SET_AUTH_ERROR', error)
     setTimeout(() => {
       commit('CLEAR_AUTH_ERROR')
-    }, 20000)
+    }, 10000)
   },
 
   clearAuthError ({ commit }) {

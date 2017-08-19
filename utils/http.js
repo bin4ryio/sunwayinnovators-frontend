@@ -40,7 +40,7 @@ function parseJSON (response) {
     }))
 }
 
-export const apiURL = `${scheme}://${hostname}/api`
+export const apiURL = `${scheme}://${hostname}`
 export const socketURL = `${socketScheme}://${hostname}/socket`
 
 export async function httpGet (url) {
@@ -48,8 +48,8 @@ export async function httpGet (url) {
     headers: buildHeaders()
   }
   return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
+    .then(checkStatus).json()
+    // .then(parseJSON)
 }
 
 export async function httpPost (url, data) {
@@ -60,8 +60,8 @@ export async function httpPost (url, data) {
     body: body
   }
   return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
+    .then(checkStatus).json()
+    // .then(parseJSON)
 }
 
 export async function httpDelete (url) {
@@ -70,8 +70,8 @@ export async function httpDelete (url) {
     headers: buildHeaders()
   }
   return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
+    .then(checkStatus).json()
+    // .then(parseJSON)
 }
 
 export async function httpUpdate (url, data) {
@@ -82,6 +82,6 @@ export async function httpUpdate (url, data) {
     body: body
   }
   return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
+    .then(checkStatus).json()
+    // .then(parseJSON)
 }

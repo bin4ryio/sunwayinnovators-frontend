@@ -1,21 +1,29 @@
 {
-  "name": "sunwayinnovators-frontend",
+  "name": "innovators-frontend",
   "version": "1.0.0",
   "description": "Nuxt.js project",
-  "author": "bin4ryio <haolun0905@gmail.com>",
+  "author": "bin4ryio (@bin4ryio)",
+  "contributors": [
+    {
+      "name": "kw7oe (@kw7oe)"
+    }
+  ],
   "private": true,
   "dependencies": {
+    "@nuxtjs/axios": "^3.1.4",
+    "@nuxtjs/component-cache": "latest",
+    "@nuxtjs/proxy": "^1.1.1",
+    "@nuxtjs/pwa": "latest",
     "es6-promise": "^4.1.1",
     "isomorphic-fetch": "^2.2.1",
     "iview": "^2.0.0",
     "js-cookie": "^2.1.4",
     "jwt-decode": "^2.2.0",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
     "lodash": "^4.17.4",
     "normalize.css": "^7.0.0",
-    "nuxt": "latest",
-    "vuex": "^2.3.1"
+    "nuxt": "^1.0.0-rc4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
   },
   "scripts": {
     "dev": "nuxt",

@@ -11,9 +11,7 @@
 <script>
 </script>
 
-<style lang="less">
-@import "../assets/theme.less";
-
+<style>
 .layout-header {
   height: 96px;
   background: #0052cc;
@@ -21,7 +19,7 @@
 }
 
 .layout-container {
-  max-width: 960px;
+  max-width: 992px;
   margin: 0 auto;
 }
 

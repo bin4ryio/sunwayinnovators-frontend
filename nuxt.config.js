@@ -1,7 +1,4 @@
 module.exports = {
-  /*
-  ** Headers of the page
-  */
   head: {
     title: 'Sunway Innovators',
     meta: [
@@ -15,20 +12,15 @@ module.exports = {
     ]
   },
   css: [
-    'normalize.css',
-    { src: '../assets/theme.less', lang: 'less' }
+    'normalize.css'
   ],
   loading: {
     color: '#3B8070'
   },
   build: {
     vendor: [
-      'es6-promise',
-      'isomorphic-fetch',
-      'iview',
       'lodash'
     ],
-    // Run ESLINT on save
     extend (config, ctx) {
       if (ctx.isClient) {
         config.module.rules.push({
@@ -44,6 +36,22 @@ module.exports = {
     middleware: 'check-auth'
   },
   plugins: [
-    { src: '~/plugins/iview.js' }
+  ],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+    // '@nuxtjs/google-analytics'
+  ],
+  axios: {
+    // baseURL: 'http://localhost:5000/api',
+    // browserBaseURL: '/api',
+    credentials: true,
+    debug: true,
+    proxyHeaders: true
+  },
+  proxy: [
+    // Create server middleware to pass request from /api to http://localhost:5000/v1
+    // pathRewrite changes /api to /v1
+    ['/api', { target: 'http://localhost:5000', pathRewrite: { '^/api': '/v1' } }]
   ]
 }
