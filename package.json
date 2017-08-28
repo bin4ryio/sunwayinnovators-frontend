@@ -21,7 +21,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "normalize.css": "^7.0.0",
-    "nuxt": "^1.0.0-rc4",
+    "nuxt": "^1.0.0-rc6",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"
   },

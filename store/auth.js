@@ -1,5 +1,4 @@
 import { getUserFromLocalStorage, setToken, unsetToken } from '~/utils/auth'
-// import { apiURL, httpPost } from '../utils/http'
 
 export const state = () => ({
   authError: null,
@@ -7,48 +6,50 @@ export const state = () => ({
 })
 
 export const getters = {
+  accessToken: state => state.accessToken,
   authError: state => state.authError,
   authUser: state => state.authUser
 }
 
 export const actions = {
-  async signIn ({ commit, dispatch }, { axios, email, password }) {
+
+  signIn ({ commit, dispatch }, { axios, user }) {
     try {
-      const res = await axios.post('auth/sign_in', {
-        email: email,
-        password: password
+      return axios.post('users/sign_in', {
+        user
       })
-      console.log(res.headers)
-      setToken(res.headers['access-token'])
-      dispatch('clearAuthError')
-    } catch (error) {
-      console.log(error)
-      dispatch('setAuthError', error.response.data.errors)
+      .then((res) => {
+        let token = res.headers.authorization
+        setToken(token)
+        let user = getUserFromLocalStorage()
+        commit('SET_AUTH_USER', user)
+        dispatch('clearAuthError')
+      })
+    } catch (err) {
+      dispatch('setAuthError', err)
     }
   },
 
-  //     console.log(res)
-  //     setToken(res.data.data.access_token)
-  //     const loggedUser = getUserFromLocalStorage()
-  //     commit('auth/SET_AUTH_USER', loggedUser, { root: true })
-  //     dispatch('clearAuthError')
-
-  async signUp ({ commit, dispatch }, { axios, email, password, passwordConfirmation }) {
-    const res = await axios.$post('/auth', {
-      email: email,
-      password: password,
-      password_confirmation: passwordConfirmation
-    })
-    console.log(res)
-    dispatch('clearAuthError')
+  signUp ({ commit, dispatch }, { axios, user }) {
+    try {
+      return axios.post('users', {
+        user
+      })
+      .then((res) => {
+        let token = res.headers.authorization
+        setToken(token)
+        let user = getUserFromLocalStorage()
+        commit('SET_AUTH_USER', user)
+        dispatch('clearAuthError')
+      })
+    } catch (err) {
+      dispatch('setAuthError', err)
+    }
   },
 
   async signOut ({ commit }) {
-    // unsetToken()
+    unsetToken()
     commit('CLEAR_AUTH_USER')
-    // .then((res) => {
-    //   unsetToken()
-    //   commit('CLEAR_AUTH_USER')
     // }
   },
 
@@ -65,14 +66,11 @@ export const actions = {
 }
 
 export const mutations = {
-  SET_ACCESS_TOKEN (state, payload) {
-    state.accessToken = payload
-  },
   SET_AUTH_ERROR (state, payload) {
     state.authError = payload
   },
   SET_AUTH_USER (state, payload) {
-    state.authUser = payload
+    state.authUser = payload || null
   },
   CLEAR_AUTH_USER (state) {
     state.authUser = null
