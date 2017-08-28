@@ -21,7 +21,6 @@ export const extractInfoFromHash = () => {
 export const setToken = (token) => {
   if (process.SERVER_BUILD) return
   window.localStorage.setItem('token', token)
-  console.log(`TOKEN::: ${window.localStorage.setItem('token', token)}`)
   window.localStorage.setItem('user', JSON.stringify(jwtDecode(token)))
   Cookie.set('jwt', token)
 }

@@ -43,15 +43,19 @@ module.exports = {
     // '@nuxtjs/google-analytics'
   ],
   axios: {
-    // baseURL: 'http://localhost:5000/api',
-    // browserBaseURL: '/api',
+    baseURL: 'http://localhost:5000/api/v1',
+    browserBaseURL: '/api/v1',
     credentials: true,
-    debug: true,
+    debug: false,
     proxyHeaders: true
+    // requestInterceptor: (config, { store }) => {
+    //   if (store.state.token) {
+    //     config.headers.common['Authorization'] = store.state.token
+    //   }
+    //   return config
+    // }
   },
   proxy: [
-    // Create server middleware to pass request from /api to http://localhost:5000/v1
-    // pathRewrite changes /api to /v1
-    ['/api', { target: 'http://localhost:5000', pathRewrite: { '^/api': '/v1' } }]
+    'http://localhost:5000/api/v1'
   ]
 }

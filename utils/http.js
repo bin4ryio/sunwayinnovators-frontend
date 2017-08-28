@@ -5,8 +5,16 @@ import { polyfill } from 'es6-promise'
 
 const { socketScheme, scheme, hostname } =
   process.env.NODE_ENV === 'production'
-  ? { socketScheme: 'wss', scheme: 'https', hostname: window.location.hostname }
-  : { socketScheme: 'ws', scheme: 'http', hostname: 'localhost:5000' }
+  ? {
+    socketScheme: 'wss',
+    scheme: 'https',
+    hostname: window.location.hostname
+  }
+  : {
+    socketScheme: 'ws',
+    scheme: 'http',
+    hostname: 'localhost:5000'
+  }
 
 const defaultHeaders = {
     'Accept': 'application/json',
@@ -15,6 +23,7 @@ const defaultHeaders = {
 
 function buildHeaders () {
     const jwt = localStorage.getItem('jwt')
+
     return !jwt ? defaultHeaders : {
         ...defaultHeaders,
         'Authorization': `Bearer ${jwt}`
@@ -40,7 +49,7 @@ function parseJSON (response) {
     }))
 }
 
-export const apiURL = `${scheme}://${hostname}`
+export const apiURL = `${scheme}://${hostname}/api/v1`
 export const socketURL = `${socketScheme}://${hostname}/socket`
 
 export async function httpGet (url) {
