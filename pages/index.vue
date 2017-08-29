@@ -1,17 +1,17 @@
 <template>
   <div>
-    <SignIn/>
+    <landing/>
     <SignUp/>
   </div>
 </template>
 
 <script>
-import SignIn from '~/components/SignIn.vue'
+import Landing from '~/components/Landing.vue'
 import SignUp from '~/components/SignUp.vue'
 
 export default {
   components: {
-    SignIn,
+    Landing,
     SignUp
   }
 }

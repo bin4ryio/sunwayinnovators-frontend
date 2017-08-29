@@ -6,9 +6,9 @@ export const state = () => ({
 })
 
 export const getters = {
-  accessToken: state => state.accessToken,
   authError: state => state.authError,
-  authUser: state => state.authUser
+  authUser: state => state.authUser,
+  currentUser: state => state.authUser ? state.authUser['email'] : ''
 }
 
 export const actions = {
@@ -50,7 +50,6 @@ export const actions = {
   async signOut ({ commit }) {
     unsetToken()
     commit('CLEAR_AUTH_USER')
-    // }
   },
 
   setAuthError ({ commit }, error) {

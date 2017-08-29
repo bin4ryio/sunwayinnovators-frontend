@@ -8,11 +8,13 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro' }
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Source+Sans+Pro' },
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   css: [
-    'normalize.css'
+    // 'normalize.css',
+    { src: '~/assets/theme.scss', lang: 'scss' }
   ],
   loading: {
     color: '#3B8070'
@@ -36,6 +38,7 @@ module.exports = {
     middleware: 'check-auth'
   },
   plugins: [
+    '~/plugins/buefy.js'
   ],
   modules: [
     '@nuxtjs/axios',
