@@ -1,9 +1,7 @@
 <template>
-  <div class="app">
+  <div>
     <navbar/>
-    <div class="container is-fluid">
-      <nuxt/>
-    </div>
+    <nuxt/>
     <foot/>
   </div>
 </template>
