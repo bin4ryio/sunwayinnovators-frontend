@@ -13,9 +13,9 @@ export const getters = {
 
 export const actions = {
 
-  signIn ({ commit, dispatch }, { axios, user }) {
+  async signIn ({ commit, dispatch }, { user }) {
     try {
-      return axios.post('users/sign_in', {
+      const res = await this.axios.post('users/sign_in', {
         user
       })
       .then((res) => {
@@ -26,13 +26,13 @@ export const actions = {
         dispatch('clearAuthError')
       })
     } catch (err) {
-      dispatch('setAuthError', err)
+      dispatch('setAuthError', err.response.data.error)
     }
   },
 
-  signUp ({ commit, dispatch }, { axios, user }) {
+  async signUp ({ commit, dispatch }, { user }) {
     try {
-      return axios.post('users', {
+      const res = await this.axios.post('users', {
         user
       })
       .then((res) => {
@@ -43,20 +43,27 @@ export const actions = {
         dispatch('clearAuthError')
       })
     } catch (err) {
-      dispatch('setAuthError', err)
+      dispatch('setAuthError', err.response.data.error)
     }
   },
 
   async signOut ({ commit }) {
-    unsetToken()
-    commit('CLEAR_AUTH_USER')
+    // try {
+    //   const res = await this.axios.delete('users/sign_out', {
+    //   })
+    //   .then((res) => {
+    //     unsetToken()
+    //     commit('CLEAR_AUTH_USER')
+    //   })
+    // } catch (err) {
+    // }
   },
 
   setAuthError ({ commit }, error) {
     commit('SET_AUTH_ERROR', error)
     setTimeout(() => {
       commit('CLEAR_AUTH_ERROR')
-    }, 20000)
+    }, 10000)
   },
 
   clearAuthError ({ commit }) {

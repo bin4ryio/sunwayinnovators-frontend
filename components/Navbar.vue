@@ -41,11 +41,11 @@
                   <b-field label="Password">
                     <b-input v-model="user.password" type="password" password-reveal placeholder="Your password" required />
                   </b-field>
-                  <p class="error" v-if="error">{{ error }}</p>
-                  <b-checkbox>Remember me</b-checkbox>
+                  <p class="help is-danger" v-if="error">{{ error }}</p>
+                  <!-- <b-checkbox>Remember me</b-checkbox> -->
                 </section>
                 <footer class="modal-card-foot">
-                  <button @click="signIn" class="button is-primary">Login</button>
+                  <button @click="signIn" class="button is-primary">Sign In</button>
                 </footer>
               </div>
             </form>
@@ -91,7 +91,6 @@ export default {
   methods: {
     signIn () {
       this.$store.dispatch('auth/signIn', {
-        axios: this.$axios,
         user: this.user
       })
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <landing/>
-    <SignUp/>
+    <sign-up/>
   </div>
 </template>
 
