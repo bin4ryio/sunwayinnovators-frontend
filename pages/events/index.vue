@@ -1,15 +1,13 @@
 <template>
-  <div class="section is-medium">
     <div class="container">
-
-      <div class="columns">
-        <div class="column is-one-forth" v-for="photo of tooManyPhotos">
+      <section>
+      <div class="columns is-multiline">
+        <div class="column" v-for="photo of tooManyPhotos">
           <ImageCard :data="photo"/>
         </div>
       </div>
-
+    </section>
     </div>
-  </div>
 </template>
 
 <script>
@@ -23,7 +21,7 @@ export default {
 
   computed: {
     tooManyPhotos () {
-      return this.photos.slice(0, 20)
+      return this.photos.slice(0, 12)
     }
   },
 
