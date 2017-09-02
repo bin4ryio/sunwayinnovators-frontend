@@ -1,15 +1,10 @@
 <template>
-  <div class="user">
-    <h3>{{ name }}</h3>
-    <h4>@{{ username }}</h4>
-    <p>Email : {{ email }}</p>
-    <p><nuxt-link to="/">List of users</nuxt-link></p>
+  <div>
+
   </div>
 </template>
 
 <script>
-import { httpPost } from '../../utils/http'
-
 export default {
   validate ({ params }) {
     return !isNaN(+params.id)
