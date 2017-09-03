@@ -1,20 +1,20 @@
 <template>
-  <section class="hero is-primary">
+  <div class="hero">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          This is a Hero
+          Add event
         </h1>
         <h2 class="subtitle">
-          Primary subtitle
+          <nuxt-link to="/">Back to the home page</nuxt-link>
         </h2>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
+export default {
+  middleware: 'auth'
+}
 </script>
-
-<style>
-</style>

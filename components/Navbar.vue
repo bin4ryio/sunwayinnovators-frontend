@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <nuxt-link class="navbar-item" to="/">
-        <img src="~/assets/logo_glyph.png" alt="Sunway Innovators - Student-led community to meet people" height="28">
+        <img src="~/assets/logo_glyph.png" alt="Sunway Innovators - Meet fun people">
       </nuxt-link>
 
       <span class="navbar-burger burger" :class="{ 'is-active': isMenuActive }" @click="isMenuActive = !isMenuActive">
@@ -18,7 +18,7 @@
           <b-icon icon="event"></b-icon> Events
         </nuxt-link>
         <nuxt-link class="navbar-item" to="/clubs">
-          <b-icon icon="face"></b-icon> Clubs
+          <b-icon icon="group"></b-icon> Clubs
         </nuxt-link>
         <nuxt-link class="navbar-item" to="/about">
           <b-icon icon="face"></b-icon> About
@@ -33,7 +33,7 @@
           </a>
           <b-dropdown-item custom paddingless>
             <form v-on:submit.prevent>
-              <div class="modal-card" style="width:300px;">
+              <div class="modal-card">
                 <section class="modal-card-body">
                   <b-field label="Email">
                     <b-input v-model="user.email" type="email" placeholder="Your email" required />
@@ -42,7 +42,7 @@
                     <b-input v-model="user.password" type="password" password-reveal placeholder="Your password" required />
                   </b-field>
                   <p class="help is-danger" v-if="error">{{ error }}</p>
-                  <!-- <b-checkbox>Remember me</b-checkbox> -->
+                  <b-checkbox>Remember me</b-checkbox>
                 </section>
                 <footer class="modal-card-foot">
                   <button @click="signIn" class="button is-primary">Sign In</button>
@@ -76,7 +76,7 @@ export default {
   computed: {
     ...mapGetters({
       'currentUser': 'auth/currentUser',
-      'error': 'auth/authError'
+      'error': 'auth/error'
     })
   },
   data () {
@@ -101,5 +101,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.modal-card {
+  width: 300px;
+}
 </style>

@@ -17,7 +17,7 @@ module.exports = {
     { src: '~/assets/theme.scss', lang: 'scss' }
   ],
   loading: {
-    color: '#3B8070'
+    color: '#403F63'
   },
   build: {
     vendor: [

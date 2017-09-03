@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <form v-on:submit.prevent>
-      <h3>Sign Up</h3>
-      <input v-model="user.email" placeholder="Email" />
-      <input v-model="user.password" placeholder="Password" type="password"  />
-      <input v-model="user.passwordConfirmation" placeholder="Password Confirmation" type="password"  />
-      <button @click="signUp">Login</button>
-    </form>
-  </div>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <form v-on:submit.prevent>
+          <h3>Sign Up</h3>
+          <input v-model="user.email" placeholder="Email" />
+          <input v-model="user.password" placeholder="Password" type="password"  />
+          <input v-model="user.passwordConfirmation" placeholder="Password Confirmation" type="password"  />
+          <button @click.native="signUp">Login</button>
+        </form>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

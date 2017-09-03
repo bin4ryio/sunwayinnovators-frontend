@@ -1,29 +1,47 @@
 <template>
-  <div>
-
+  <div class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          {{ event.attributes.name }}
+        </h1>
+        <h2 class="subtitle">
+          {{ event.attributes.content }}
+        </h2>
+        <p class="help is-danger" v-if="error">{{ error }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   validate ({ params }) {
     return !isNaN(+params.id)
   },
-  async asyncData ({ params, error }) {
-    try {
-      const { data } = await httpPost.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
-      return data
-    } catch (e) {
-      error({ message: 'User not found', statusCode: 404 })
+  fetch ({ store, params }) {
+    if (store.state.events.event.id !== params.id) {
+      store.dispatch('events/getEvent', {
+        id: params.id
+      })
     }
+    return store.state.events.event
+  },
+  computed: {
+    ...mapGetters({
+      event: 'events/event',
+      error: 'events/error'
+    })
+  },
+  methods: {
+    ...mapActions({
+      getEvent: 'events/getEvent'
+    })
   }
 }
 </script>
 
-<style scoped>
-.user {
-  text-align: center;
-  margin-top: 100px;
-  font-family: sans-serif;
-}
+<style>
 </style>

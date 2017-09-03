@@ -1,9 +1,9 @@
 <template>
   <div class="app">
     <navbar/>
-    <div class="container is-fluid">
+    <main class="app-content">
       <nuxt/>
-    </div>
+    </main>
     <foot/>
   </div>
 </template>
@@ -21,4 +21,13 @@ export default {
 </script>
 
 <style>
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1 0 auto;
+}
 </style>

@@ -4,5 +4,5 @@ export default function ({ isServer, store, req }) {
    // If nuxt generate, pass this middleware
   if (isServer && !req) return
   const loggedUser = isServer ? getUserFromCookie(req) : getUserFromLocalStorage()
-  store.commit('auth/SET_AUTH_USER', loggedUser, { root: true })
+  store.commit('auth/SET_USER', loggedUser, { root: true })
 }
