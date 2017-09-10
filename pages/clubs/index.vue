@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
-      <section>
+  <div class="container">
+    <section>
       <div class="columns is-multiline">
-        <div class="column is-one-quarter" v-for="photo of tooManyPhotos">
+        <div class="column is-one-quarter" v-for="photo in tooManyPhotos">
           <ImageCard :data="photo"/>
         </div>
       </div>
     </section>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -37,7 +37,6 @@ export default {
     axios.get(`http://jsonplaceholder.typicode.com/photos`)
       .then(response => {
         this.photos = response.data
-        console.log(this.photos)
       })
       .catch(e => {
         this.errors.push(e)

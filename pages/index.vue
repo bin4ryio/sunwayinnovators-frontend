@@ -2,7 +2,7 @@
   <div>
     <landing/>
     <SignUp/>
-    <ImageCard/>
+    <!-- <ImageCard/> -->
   </div>
 </template>
 

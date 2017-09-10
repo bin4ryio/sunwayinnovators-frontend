@@ -31,9 +31,6 @@ export default {
       type: Object,
       required: false
     }
-  },
-  created () {
-    // console.log(this.data)
   }
 }
 </script>
