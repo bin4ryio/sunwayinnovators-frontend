@@ -12,9 +12,10 @@
   "dependencies": {
     "@nuxtjs/axios": "^3.1.4",
     "@nuxtjs/component-cache": "latest",
+    "@nuxtjs/google-analytics": "^1.0.0",
     "@nuxtjs/proxy": "^1.1.1",
-    "@nuxtjs/pwa": "latest",
-    "buefy": "^0.5.1",
+    "@nuxtjs/pwa": "^0.2.1",
+    "buefy": "^0.5.2",
     "es6-promise": "^4.1.1",
     "isomorphic-fetch": "^2.2.1",
     "iview": "^2.0.0",

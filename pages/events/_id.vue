@@ -1,44 +1,29 @@
 <template>
-  <div class="hero is-primary">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          {{ event.attributes.name }}
-        </h1>
-        <h2 class="subtitle">
-          {{ event.attributes.content }}
-        </h2>
-        <p class="help is-danger" v-if="error">{{ error }}</p>
-      </div>
+  <div class="section is-primary">
+    <div class="container">
+      <h1 class="title">Event Detail</h1>
+      <event-detail :event="event($route.params.id)" :isAdding="true" ></event-detail>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import EventDetail from '~/components/events/EventDetail.vue'
 
 export default {
-  validate ({ params }) {
-    return !isNaN(+params.id)
-  },
-  fetch ({ store, params }) {
-    if (store.state.events.event.id !== params.id) {
-      store.dispatch('events/getEvent', {
-        id: params.id
-      })
+  async fetch ({ store, params }) {
+    if (!this.event) {
+      await store.dispatch('events/eventById', params['id'])
     }
-    return store.state.events.event
   },
   computed: {
     ...mapGetters({
-      event: 'events/event',
-      error: 'events/error'
+      event: 'events/eventById'
     })
   },
-  methods: {
-    ...mapActions({
-      getEvent: 'events/getEvent'
-    })
+  components: {
+    EventDetail
   }
 }
 </script>

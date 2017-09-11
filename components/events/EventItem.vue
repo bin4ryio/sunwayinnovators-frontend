@@ -31,15 +31,10 @@
 
 <script>
 export default {
+  props: ['event'],
   computed: {
     excerpt () {
       return this.event.attributes.content.substr(0, 100) + '...'
-    }
-  },
-  props: {
-    event: {
-      type: Object,
-      required: true
     }
   }
 }
