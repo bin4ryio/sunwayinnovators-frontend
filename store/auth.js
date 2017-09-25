@@ -1,81 +1,91 @@
 import { getUserFromLocalStorage, setToken, unsetToken } from '~/utils/auth'
 
 export const state = () => ({
-  authError: null,
-  authUser: null
+  error: null,
+  user: null
 })
 
 export const getters = {
-  accessToken: state => state.accessToken,
-  authError: state => state.authError,
-  authUser: state => state.authUser
+  error: state => state.error,
+  user: state => state.user,
+  currentUser: state => state.user ? state.user.email : ''
 }
 
 export const actions = {
 
-  signIn ({ commit, dispatch }, { axios, user }) {
+  async signIn ({ commit, dispatch }, { user }) {
     try {
-      return axios.post('users/sign_in', {
+      await this.axios.post('users/sign_in', {
         user
       })
       .then((res) => {
         let token = res.headers.authorization
         setToken(token)
         let user = getUserFromLocalStorage()
-        commit('SET_AUTH_USER', user)
-        dispatch('clearAuthError')
+        commit('SET_USER', user)
+        dispatch('clearError')
       })
     } catch (err) {
-      dispatch('setAuthError', err)
+      dispatch('setError', err.response.data.error)
     }
   },
 
-  signUp ({ commit, dispatch }, { axios, user }) {
+  async signUp ({ commit, dispatch }, { user }) {
     try {
-      return axios.post('users', {
+      await this.axios.post('users', {
         user
       })
       .then((res) => {
         let token = res.headers.authorization
         setToken(token)
         let user = getUserFromLocalStorage()
-        commit('SET_AUTH_USER', user)
-        dispatch('clearAuthError')
+        commit('SET_USER', user)
+        dispatch('clearError')
       })
     } catch (err) {
-      dispatch('setAuthError', err)
+      dispatch('setError', err.response.data.error)
     }
   },
 
-  async signOut ({ commit }) {
-    unsetToken()
-    commit('CLEAR_AUTH_USER')
-    // }
+  async signOut ({ commit, dispatch }) {
+    try {
+      unsetToken()
+      commit('CLEAR_USER')
+      // TODO
+      // await this.axios.delete('users/sign_out', {
+      // })
+      // .then((res) => {
+      //   unsetToken()
+      //   commit('CLEAR_USER')
+      // })
+    } catch (err) {
+      dispatch('setError', err.response.data.error)
+    }
   },
 
-  setAuthError ({ commit }, error) {
-    commit('SET_AUTH_ERROR', error)
+  setError ({ commit }, error) {
+    commit('SET_ERROR', error)
     setTimeout(() => {
-      commit('CLEAR_AUTH_ERROR')
-    }, 20000)
+      commit('CLEAR_ERROR')
+    }, 10000)
   },
 
-  clearAuthError ({ commit }) {
-    commit('CLEAR_AUTH_ERROR')
+  clearError ({ commit }) {
+    commit('CLEAR_ERROR')
   }
 }
 
 export const mutations = {
-  SET_AUTH_ERROR (state, payload) {
-    state.authError = payload
+  SET_ERROR (state, payload) {
+    state.error = payload
   },
-  SET_AUTH_USER (state, payload) {
-    state.authUser = payload || null
+  SET_USER (state, payload) {
+    state.user = payload || null
   },
-  CLEAR_AUTH_USER (state) {
-    state.authUser = null
+  CLEAR_ERROR (state) {
+    state.error = null
   },
-  CLEAR_AUTH_ERROR (state) {
-    state.authError = null
+  CLEAR_USER (state) {
+    state.user = null
   }
 }

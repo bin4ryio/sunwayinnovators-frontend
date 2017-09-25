@@ -1,34 +1,32 @@
 <template>
-  <div class="user">
-    <h3>{{ name }}</h3>
-    <h4>@{{ username }}</h4>
-    <p>Email : {{ email }}</p>
-    <p><nuxt-link to="/">List of users</nuxt-link></p>
+  <div class="section is-primary">
+    <div class="container">
+      <h1 class="title">Event Detail</h1>
+      <event-detail :event="event($route.params.id)" :isAdding="true" ></event-detail>
+    </div>
   </div>
 </template>
 
 <script>
-import { httpPost } from '../../utils/http'
+import { mapGetters } from 'vuex'
+import EventDetail from '~/components/events/EventDetail.vue'
 
 export default {
-  validate ({ params }) {
-    return !isNaN(+params.id)
-  },
-  async asyncData ({ params, error }) {
-    try {
-      const { data } = await httpPost.get(`https://jsonplaceholder.typicode.com/users/${+params.id}`)
-      return data
-    } catch (e) {
-      error({ message: 'User not found', statusCode: 404 })
+  async fetch ({ store, params }) {
+    if (!this.event) {
+      await store.dispatch('events/eventById', params['id'])
     }
+  },
+  computed: {
+    ...mapGetters({
+      event: 'events/eventById'
+    })
+  },
+  components: {
+    EventDetail
   }
 }
 </script>
 
-<style scoped>
-.user {
-  text-align: center;
-  margin-top: 100px;
-  font-family: sans-serif;
-}
+<style>
 </style>
